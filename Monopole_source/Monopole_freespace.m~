@@ -4,21 +4,20 @@
  
 
 
-f = 100;            % Single frequency
+f = 1000;           % Single frequency
 omega = 2*pi*f;     % Angular frequency 
 c = 344;            % Speed of sound
 lambda = c/f;       % Wavelength
 rho = 1.225;        % Density of air
 k = 2*pi/lambda;    % Wave number
-q = 1;              % Volume Velocity
+q = .05;            % Volume Velocity
 r = -1:.01:1;       % Radius of source
 l = length(r);
 
-[X, Y] = meshgrid(r);
-Z = sqrt(X.^2 + Y.^2);
-p = 1j*omega*rho*q*exp(-1j*k*Z)./(4*pi*Z);
 
-pp = 20.*log10(abs(p));
 
-contourf(pp)
+p = 1j*omega*rho*q*exp(-1j*k*r)./(4*pi*r);
+
+
+
 
