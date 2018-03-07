@@ -28,8 +28,15 @@ pt = exp(1i*omega.*t);  % time
 
 for i = 1:length(t)
     p = pz .* pt(i);
-    surf(rx,ry,(real(p)))
+    surf(rx,ry,(real(p)),'edgecolor', 'none')
     colormap('jet')
+    
+    hold on
+    scatter3(0,0,10,'o','linewidth',2,'MarkerFaceColor','k','MarkerEdgeColor','k')
+    hold off
+    colorbar
     view(0,90)
+    title(['Time = ', num2str(t(i)),' seconds'])
     pause(.001)
+    xlabel('Meters'),ylabel('Meters')
 end
