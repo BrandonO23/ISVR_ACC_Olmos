@@ -2,7 +2,7 @@
 clc
 clear
 
-f = 500:100:3000;    % Frequency vector
+f = 200:100:5000;    % Frequency vector
 omega = 2*pi*f;      % Angular frequency 
 c = 344;             % Speed of sound
 lambda = c./f;       % Wavelength
@@ -23,7 +23,7 @@ Z2 = sqrt((X).^2 + (Y+d).^2);    % Distance to point from origin
 for i = 1:length(f)
     pz1 = exp(-1i*k(i).*Z1);     % First Pressure field 
     pz2 = exp(-1i*k(i).*Z2);     % Second Pressure fieldPressure
-    pz = pz1 + pz2;              % If linear
+    pz = pz1 - pz2;              % If linear
     p = pz;
     surf(rx,ry,(real(p)),'edgecolor', 'none')
     hold on
