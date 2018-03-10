@@ -1,12 +1,9 @@
 %% Cancellation at point in far field
-% Pressure at some point is p(re) = Pp + Pe
-% Monopole = jwrhoqe^(-jkr)/(4pir)
 
 clc
 clear
 
-for d = .001:.001:.01
-f = 1000;
+for f = 100:100:10000
 omega = 2*pi.*f;      % Angular frequency 
 c = 344;             % Speed of sound
 lambda = c./f;       % Wavelength
@@ -21,6 +18,7 @@ rx = -1:delta:1;       % Radius in x
 ry = -1:delta:1;        % Radius in y
 lx = length(rx);     % length of rx
 ly = length(ry);     % length of ry
+d = .01;              % Distance from origin to monopole source
 rcan = .5;           % Distance to cancellation
 
 
@@ -59,5 +57,5 @@ colorbar
 xlabel('Meters'),ylabel('Meters')
 title(['Cancellation at ', num2str(rcan),' meters, \theta = ',num2str(theta),'.   Frequency = ',num2str(f),' Hz'])
 % M(theta) = getframe;
-pause(.1)
+pause(.001)
 end

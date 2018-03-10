@@ -1,18 +1,17 @@
 %% Cancellation at point in far field
-% Pressure at some point is p(re) = Pp + Pe
-% Monopole = jwrhoqe^(-jkr)/(4pir)
 
 clc
 clear
 
-for f = 100:100:10000
+for d = .001:.001:.7
+f = 1000;
 omega = 2*pi.*f;      % Angular frequency 
 c = 344;             % Speed of sound
 lambda = c./f;       % Wavelength
 rho = 1.225;         % Density of air
 k = 2*pi./lambda;    % Wave number
 qp = .0005;          % Volume Velocity
-theta = 90;
+theta = 140;
 
 % To make a bit easier the field is limited to first quadrant
 delta = .01;
@@ -20,7 +19,6 @@ rx = -1:delta:1;       % Radius in x
 ry = -1:delta:1;        % Radius in y
 lx = length(rx);     % length of rx
 ly = length(ry);     % length of ry
-d = .01;              % Distance from origin to monopole source
 rcan = .5;           % Distance to cancellation
 
 
@@ -46,7 +44,7 @@ pp = 1j*omega*rho*qp*exp(-1i*k.*Zp)./(4*pi*Zp);
 pc = 1j*omega*rho*qc*exp(-1i*k.*Zc)./(4*pi*Zc); 
 p = pp + pc;
 
-surf(rx,ry,(real(p)),'edgecolor', 'none')
+surf(rx,ry,(abs(p)),'edgecolor', 'none')
 caxis([-1 1])
 hold on
 scatter3(0-d,0,2,'o','linewidth',2,'MarkerFaceColor','k','MarkerEdgeColor','k')
@@ -57,7 +55,7 @@ colormap('jet')
 view(0,90)
 colorbar
 xlabel('Meters'),ylabel('Meters')
-title(['Cancellation at ', num2str(rcan),' meters, \theta = ',num2str(theta),'.   Frequency = ',num2str(f),' Hz'])
+title(['Distance from origin ', num2str(d),' meters, \theta = ',num2str(theta),'.   Frequency = ',num2str(f),' Hz'])
 % M(theta) = getframe;
-pause(.001)
+pause(.01)
 end

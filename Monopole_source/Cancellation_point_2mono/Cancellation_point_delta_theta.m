@@ -1,6 +1,4 @@
 %% Cancellation at point in far field
-% Pressure at some point is p(re) = Pp + Pe
-% Monopole = jwrhoqe^(-jkr)/(4pir)
 
 clc
 clear
@@ -49,7 +47,7 @@ pp = 1j*omega*rho*qp*exp(-1i*k.*Zp)./(4*pi*Zp);
 pc = 1j*omega*rho*qc*exp(-1i*k.*Zc)./(4*pi*Zc); 
 p = pp + pc;
 
-surf(rx,ry,(real(p)),'edgecolor', 'none')
+surf(rx,ry,(abs(p)),'edgecolor', 'none')
 caxis([-1 1])
 hold on
 scatter3(0-d,0,2,'o','linewidth',2,'MarkerFaceColor','k','MarkerEdgeColor','k')
