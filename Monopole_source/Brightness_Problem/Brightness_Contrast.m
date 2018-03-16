@@ -74,13 +74,20 @@ Rb = sum(Gd)'*sum(Gd)./tS;
 qc = V(:,2);
 
 p = zeros(length(ry),length(rx));
+lam = Jo/(qc'*qc);
+q = lam.*qc;
+
 for i = 1:l
-    p = p + green{i}.*qc(i);
+    p = p + green{i}.*q(i);
 end
+
+
+lam = Jo/(qc'*qc);
+q = lam.*qc;
 
 surf(rx,ry,(abs(p)),'edgecolor', 'none')
 colormap('jet')
-caxis([0 1e3])
+caxis([-.5 .5])
 view(0,90)
 co = colorbar;
 co.Label.String = 'SPL (dB ref @ 20 \muPa)';

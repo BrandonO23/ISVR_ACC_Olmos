@@ -2,7 +2,7 @@
 clc
 clear
 
-for f = 50:50:5000
+ for f = 50:50:5000
 omega = 2*pi*f;      % Angular frequency 
 c = 344;             % Speed of sound
 lambda = c./f;       % Wavelength
@@ -10,21 +10,24 @@ rho = 1.225;         % Density of air
 k = 2*pi./lambda;    % Wave number
 qp = .0005;          % Volume Velocity
 
-delta = .01;
-rx = -2:delta:2;                 % Radius in x
+delta = .005;
+rx = -1:delta:1;                 % Radius in x
 ry = 0:delta:2;                  % Radius in y
 [X, Y] = meshgrid(rx,ry);        % Meshgrid from rx and ry
 
 % Source positions in meters
 Cs = [-.2 0;
-      .1 0;
-      -.1 0;
+      .5 0;
+      .7 0;
+      0 1;
+      -.7 0;
+      -.5 0;
       .2 0];  
   
 l = size(Cs,1);                  % Amount of Control Sources
 MeshZ = cell(l,1);
 green = cell(l,1);
-q = [.0001,.0001,.0001,.0001];
+q = [.0001,.0001,.0001,.0001,.0001,.0001,.0001];
 p = zeros(length(ry),length(rx));
 
 for i = 1:l
@@ -33,9 +36,9 @@ for i = 1:l
     p = p + green{i}*q(i);
 end
 
-surf(rx,ry,(abs(p)),'edgecolor', 'none')
+surf(rx,ry,(real(p)),'edgecolor', 'none')
 colormap('jet')
-caxis([-1 1])
+caxis([-.5 .5])
 view(0,90)
 colorbar
 xlabel('Meters'),ylabel('Meters')
